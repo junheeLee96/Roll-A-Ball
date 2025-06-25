@@ -8,9 +8,13 @@ namespace DefaultNamespace
         bool isJumping = false;
         public float junpPower = 10f;
         public int itemCount;
+        private AudioSource audio;
+
+       
         void Awake()
         {
             rigid = GetComponent<Rigidbody>();
+            audio = GetComponent<AudioSource>();
             
         }
 
@@ -34,6 +38,17 @@ namespace DefaultNamespace
             if (collision.gameObject.name == "Floor")
             {
                 isJumping = false;
+            }
+            
+        }
+        
+        private void OnTriggerEnter(Collider other) 
+        {
+            if (other.CompareTag("Item"))
+            {
+                itemCount ++;
+                audio.Play();
+                other.transform.parent.gameObject.SetActive(false);
             }
         }
     }
