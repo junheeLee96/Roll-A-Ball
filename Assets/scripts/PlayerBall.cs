@@ -7,6 +7,7 @@ namespace DefaultNamespace
         private Rigidbody rigid;
         bool isJumping = false;
         public float junpPower = 10f;
+        public int itemCount;
         void Awake()
         {
             rigid = GetComponent<Rigidbody>();
@@ -27,6 +28,13 @@ namespace DefaultNamespace
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");
             rigid.AddForce(new Vector3(h,0,v),ForceMode.Impulse);
+        }
+        void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.name == "Floor")
+            {
+                isJumping = false;
+            }
         }
     }
 }
