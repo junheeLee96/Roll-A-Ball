@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DefaultNamespace
 {
@@ -9,6 +10,8 @@ namespace DefaultNamespace
         public float junpPower = 10f;
         public int itemCount;
         private AudioSource audio;
+
+        public GameManager manager;
 
        
         void Awake()
@@ -49,6 +52,19 @@ namespace DefaultNamespace
                 itemCount ++;
                 audio.Play();
                 other.transform.parent.gameObject.SetActive(false);
+            }else if (other.CompareTag("Finish"))
+            {
+
+                if (manager.totalItemCount == itemCount)
+                {
+                    // game over
+                    
+                }
+                else
+                {
+                    // rest
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
             }
         }
     }
