@@ -29,7 +29,7 @@ namespace DefaultNamespace
                 rigid.AddForce(new Vector3(0,junpPower,0),ForceMode.Impulse);
                 
             }
-        }
+        } 
         void FixedUpdate() 
         {
             float h = Input.GetAxisRaw("Horizontal");
@@ -38,7 +38,7 @@ namespace DefaultNamespace
         }
         void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.name == "Floor")
+            if (collision.gameObject.tag == "Floor")
             {
                 isJumping = false;
             }
@@ -54,16 +54,17 @@ namespace DefaultNamespace
                 other.transform.parent.gameObject.SetActive(false);
             }else if (other.CompareTag("Finish"))
             {
-
+				Debug.Log("ItemCount = " + itemCount);
+	
                 if (manager.totalItemCount == itemCount)
-                {
+                { 
                     // game over
-                    
+                    SceneManager.LoadScene( manager.stage + 1);
                 }
                 else
                 {
                     // rest
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    SceneManager.LoadScene(manager.stage);
                 }
             }
         }
