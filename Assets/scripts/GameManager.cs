@@ -1,12 +1,26 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
+    
 namespace DefaultNamespace
+
 {
     public class GameManager: MonoBehaviour
     {
         public int totalItemCount;
 		public int stage;
+
+        public Text stageCountText;
+        public Text playerCountText;
+        void Awake()
+        {
+            stageCountText.text = "/ " + totalItemCount;
+        }
+
+        public void GetItem(int count)
+        {
+            playerCountText.text = count.ToString();
+        }
 
         void OnTriggerEnter(Collider other)
         {

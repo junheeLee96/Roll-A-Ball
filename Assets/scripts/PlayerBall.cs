@@ -52,6 +52,8 @@ namespace DefaultNamespace
                 itemCount ++;
                 audio.Play();
                 other.transform.parent.gameObject.SetActive(false);
+                
+                manager.GetItem(itemCount);
             }else if (other.CompareTag("Finish"))
             {
 				Debug.Log("ItemCount = " + itemCount);
